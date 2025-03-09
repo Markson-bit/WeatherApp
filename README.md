@@ -1,6 +1,5 @@
 # WeatherApp
-## Weather app in development 
-
+Weather app in development 
 ## Tech stack:
 Backend API  - Java 21, Spring boot, Hibernate <br>
 Frontend Web - Vue.js, Bootstrap <br>
