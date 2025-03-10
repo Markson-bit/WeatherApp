@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./SpringAPI
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/weatherdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+  frontend:
+    build: ./vue-app
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  database:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: weatherdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
