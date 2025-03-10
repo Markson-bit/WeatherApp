@@ -4,35 +4,11 @@ Weather app in development
 Backend API  - Java 21, Spring boot, Hibernate <br>
 Frontend Web - Vue.js, Bootstrap <br>
 Mobile       - Flutter <br>
-Container    - Docker, Kubernetes <br>
+Container    - Docker <br>
 
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
+## Project Setup - Docker compose file
 
 ```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+docker-compose up --build
 ```
