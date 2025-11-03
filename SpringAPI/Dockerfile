@@ -5,9 +5,9 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-RUN mvn dependency:go-offline -B
+#RUN mvn dependency:go-ffline -B
 
-RUN mvn clean package -DskipTests
+RUN mvn clean install -DskipTests
 
 FROM openjdk:21
 
