@@ -1,24 +1,6 @@
 version: "3.8"
 
 services:
-  backend:
-    build: ./SpringAPI
-    ports:
-      - "8080:8080"
-    depends_on:
-      - database
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/weatherdb
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
-
-  frontend:
-    build: ./vue-app
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-
   database:
     image: postgres:16-alpine
     environment:
@@ -29,6 +11,31 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d weatherdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./SpringAPI
+    ports:
+      - "8080:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/weatherdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password123
+      # SPRING_PROFILES_ACTIVE: docker
+
+  frontend:
+    build: ./vue-app
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 
 volumes:
   pgdata:

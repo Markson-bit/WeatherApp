@@ -18,13 +18,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Prosty healthcheck – do szybkiego testu połączenia
     @GetMapping("/health")
     public String health() {
         return "OK";
     }
 
-    // Lista użytkowników (in-memory)
     @GetMapping("/users")
     public List<User> users() {
         return userService.getAll();
