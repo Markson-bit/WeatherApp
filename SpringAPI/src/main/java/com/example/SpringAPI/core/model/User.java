@@ -32,7 +32,7 @@ public class User {
 
     public User() {}
 
-    // gettery/settery
+    // getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
